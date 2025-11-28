@@ -1,6 +1,7 @@
 package com.pipeline.demo;
 
 import java.util.*;
+import com.pipeline.chain.AsyncRequestProcessor;
 import com.pipeline.chain.HandlerChain;
 import com.pipeline.converter.JsonConverter;
 import com.pipeline.converter.ResponseConverter;
@@ -95,8 +96,7 @@ public class Main {
           Map.of("Authorization", "valid-token", "Accept", "application/json"), Map.of(), null));
     }
 
-    com.pipeline.chain.AsyncRequestProcessor asyncProc =
-        new com.pipeline.chain.AsyncRequestProcessor(chain);
+    AsyncRequestProcessor asyncProc = new AsyncRequestProcessor(chain);
     List<HttpResponse> asyncResponses = asyncProc.processAsync(rapidRequests);
     asyncProc.shutdown();
 
